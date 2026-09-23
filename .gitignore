@@ -1,0 +1,11 @@
+.venv/
+out/
+outputs/
+voice_outputs/
+models/
+*.wav
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+.env
