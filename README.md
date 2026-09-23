@@ -122,11 +122,11 @@ This restriction exists because one of the three bundled providers ships a
 non-commercial-only model checkpoint. Upstream licenses, as published by each
 model's authors:
 
-| Provider | Model | License | Commercial use |
-|---|---|---|---|
-| Qwen3-TTS | `Qwen/Qwen3-TTS-*` | Apache 2.0 | Allowed |
-| Chatterbox Turbo | `ResembleAI/chatterbox` | MIT | Allowed |
-| OmniVoice | `k2-fsa/OmniVoice` | Code: Apache 2.0. **Pretrained weights: CC-BY-NC** (inherited from training data, e.g. Emilia) | **Not allowed** |
+| Provider | Model | MLX implementation | License | Commercial use |
+|---|---|---|---|---|
+| Qwen3-TTS | `Qwen/Qwen3-TTS-*` | [mlx-audio: qwen3_tts](https://github.com/Blaizzy/mlx-audio/tree/main/mlx_audio/tts/models/qwen3_tts) | Apache 2.0 | Allowed |
+| Chatterbox Turbo | [resemble-ai/chatterbox](https://github.com/resemble-ai/chatterbox/) | — (runs via PyTorch/MPS, not MLX) | MIT | Allowed |
+| OmniVoice | [mlx-community/OmniVoice collection](https://huggingface.co/collections/mlx-community/omnivoice) | [mlx-audio](https://github.com/Blaizzy/mlx-audio/tree/main) | Code: Apache 2.0. **Pretrained weights: CC-BY-NC** (inherited from training data, e.g. Emilia) | **Not allowed** |
 
 Because OmniVoice's weights are non-commercial-only, and this repo downloads and runs
 those weights by default, the whole project is licensed non-commercial to match. If you
@@ -135,3 +135,15 @@ checkpoints' own licenses (Apache 2.0, MIT) do permit commercial use — but you
 still bound by this repo's own PolyForm Noncommercial license for the code itself.
 Always verify current upstream license terms directly on each model's page before
 any commercial deployment; they can change independently of this repo.
+
+## Credits
+
+This engine is a thin routing/memory-management layer. The actual model inference
+comes from these upstream projects:
+
+- [Blaizzy/mlx-audio](https://github.com/Blaizzy/mlx-audio/tree/main) — MLX inference
+  engine for text-to-speech, speech-to-text, and other audio tasks on Apple Silicon.
+  Runs Qwen3-TTS and OmniVoice here.
+  - [mlx_audio/tts/models/qwen3_tts](https://github.com/Blaizzy/mlx-audio/tree/main/mlx_audio/tts/models/qwen3_tts) — Qwen3-TTS implementation.
+- [mlx-community/OmniVoice checkpoints](https://huggingface.co/collections/mlx-community/omnivoice) — quantized OmniVoice weights for mlx-audio.
+- [resemble-ai/chatterbox](https://github.com/resemble-ai/chatterbox/) — Chatterbox Turbo, run here via PyTorch/MPS.
