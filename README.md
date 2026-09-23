@@ -1,5 +1,7 @@
 # Local Voice Engine for Apple Silicon
 
+![Image](banner.png)
+
 A small, memory-aware TTS layer for local development on a 24 GB Mac.
 
 **License:** [PolyForm Noncommercial 1.0.0](LICENSE) — free for personal, research, and
